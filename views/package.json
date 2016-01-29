@@ -1,0 +1,27 @@
+{
+  "name": "psd-listing",
+  "version": "1.0.0",
+  "description": "PSD client website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreeshkatyayan/psd-listing.git"
+  },
+  "keywords": [
+    "psd"
+  ],
+  "author": "Shreesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shreeshkatyayan/psd-listing/issues"
+  },
+  "homepage": "https://github.com/shreeshkatyayan/psd-listing#readme",
+  "dependencies": {
+    "angular": "^1.4.9",
+    "angular-ui-router": "^0.2.17",
+    "jquery": "^2.2.0"
+  }
+}

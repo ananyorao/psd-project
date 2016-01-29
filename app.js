@@ -36,9 +36,6 @@ conn.on('open', function () {
   require('./config/express')(app, config)
   require('./config/routes')(app, http, db)
   
-  app.get('/', function (req, res) {
-    res.render('index')
-  })
 
   // serve app
   http.listen(config.port, function () {
