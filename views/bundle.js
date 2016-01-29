@@ -16,10 +16,10 @@ psd.config(function($stateProvider, $urlRouterProvider) {
     
     $stateProvider
         
-        // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: 'domain.html'
+            templateUrl: 'domain.html',
+            controller: 'domainCtr'
         })
         
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
@@ -28,6 +28,16 @@ psd.config(function($stateProvider, $urlRouterProvider) {
         });
         
 });
+
+
+psd.controller('domainCtr', ['$scope', '$http', function($scope, $http) {
+$http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
+    var resp = response.data;
+    $scope.domains = resp;
+  }, function errorCallback(response) {
+    console.log(response);
+  });
+}]);
 },{"angular":4,"angular-ui-router":2,"jquery":5}],2:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
