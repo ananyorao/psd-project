@@ -1,0 +1,13 @@
+<br/><h5 class="header">Companies in {{ domain.name }} domain</h5><br/>
+ <ul class="collapsible" data-collapsible="accordion" watch >
+ 					<li ng-repeat = "company in companies">
+ 						<div class="collapsible-header">{{ company.name }}</div>
+ 						<div>
+ 							<div class="row">
+ 								<p> {{ company.description }} </p>
+ 								<p class="right"><a >Know more</a></p>
+ 							</div>
+ 						</div>
+ 					</li>
+ 					
+ 			</ul>

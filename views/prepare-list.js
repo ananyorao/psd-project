@@ -1,7 +1,7 @@
 /**************************************************************/
 /* Prepares the cv to be dynamically expandable/collapsible   */
 /**************************************************************/
-function prepareList() {
+var prepareList = function() {
     $('#expList').find('li:has(ul)')
     .click( function(event) {
         if (this == event.target) {

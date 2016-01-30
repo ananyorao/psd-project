@@ -11,8 +11,8 @@ module.exports = function (db, utils) {
     },
 
     show: function(req,res) {
-      var company = require('../dummy/company');
-      res.json(company);
+      var project = require('../dummy/project');
+      res.json(project);
     },
 
     save: function(req,res) {

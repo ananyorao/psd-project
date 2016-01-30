@@ -1,0 +1,26 @@
+<br/><h4>Tata Steel</h4><br/>
+				<h5><strong>{{company.name}}</strong></h5>
+				<p>{{ company.description }}</p>
+				<p>Academic year: {{company.year}}<br/>Semester: {{company.sem}}<sup>st</sup><br/></p>
+				<h6>List of Projects:</h6>
+				<ul ng-repeat = "project in projects" class="collapsible" data-collapsible="accordion">
+					<li>
+						<div class="collapsible-header">{{ project.name }}</div>
+						<div >
+							<div class="row">
+								<div class="col s5">Name</div>
+								<div class="col s7">{{ project.student.name }}</div>
+							</div>
+							<div class="row">
+								<div class="col s5">ID Number</div>
+								<div class="col s7">{{ project.student.id }}</div>
+							</div>
+							
+							<div class="row">
+								<strong><p>Project Synopsis</p></strong>
+								<p> {{ project.body }} </p>
+								<p><a href="#!">Download Synopsis</a></p>
+							</div>
+						</div>
+					</li>
+				</ul>

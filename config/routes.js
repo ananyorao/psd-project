@@ -14,15 +14,13 @@ module.exports = function (app, http, db) {
   
 
   //domain
-  app.get('/domains', d.list) 
+  app.get('/domains', d.list)
+  app.get('/domain/:did', d.listbydomain) 
 
   //company list
   app.get('/company/:cid', c.show)
   app.post('/company/save', c.save)
   app.post('/company/search', c.search)
-
-  //company by domain
-  app.get('/:did/company', d.listbydomain)
 
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 
@@ -30,6 +28,14 @@ module.exports = function (app, http, db) {
 
   app.get('/domain.html', function(req, res) {
     res.sendfile(path.resolve('views/domain.html')); 
+  });
+
+  app.get('/domainDetail.html', function(req, res) {
+    res.sendfile(path.resolve('views/domainDetail.html')); 
+  });
+
+  app.get('/companyDetail.html', function(req, res) {
+    res.sendfile(path.resolve('views/companyDetail.html')); 
   });
 
   app.get('/css/*', function(req, res) {

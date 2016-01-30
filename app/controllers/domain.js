@@ -7,14 +7,12 @@ module.exports = function (db, utils) {
   return {
     list: function (req, res) {
     var domains = require('../dummy/domains');
-    console.log(domains);
     res.json(domains);
     },
 
     listbydomain: function (req, res) {
-    var domains = require('../dummy/domains');
-    console.log(domains);
-    res.json(domains);
+    var companies = require('../dummy/companyByDomain');
+    res.json(companies);
     }
   }
 }
