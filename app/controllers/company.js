@@ -15,6 +15,11 @@ module.exports = function (db, utils) {
       res.json(project);
     },
 
+    showall: function(req,res) {
+      var companies = require('../dummy/allcompany');
+      res.json(companies);
+    },
+
     save: function(req,res) {
       new db.Company(req.body).save(function (err, user) {
         if(err) {

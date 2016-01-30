@@ -17,10 +17,11 @@ module.exports = function (app, http, db) {
   app.get('/domains', d.list)
   app.get('/domain/:did', d.listbydomain) 
 
-  //company list
+  //company
   app.get('/company/:cid', c.show)
   app.post('/company/save', c.save)
   app.post('/company/search', c.search)
+  app.get('/companies', c.showall)
 
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 

@@ -8,3 +8,5 @@ var allCompany = [
 		"id":2
 	}
 ];
+
+module.exports = allCompany;

@@ -52,7 +52,7 @@
 				<div class="row">
 					<form>
 						<div class="input-field">
-							<input id="search" type="search" placeholder="Search..." required>
+							<input id="search" type="search" placeholder="Search..." required ng-model="search">
 						</div>
 					</form>
 				</div>
@@ -61,14 +61,13 @@
 					<ul class="collapsible" data-collapsible="expandable">
 						<li>
 							<div class="collapsible-header">2012</div>
-							<div class="collapsible-body">
-								<ul class="collapsible" data-collapsible="expandable">
+							<div>
+								<ul>
 									<li>
-										<div class="collapsible-header">First semester</div>
-										<div class="collapsible-body">
+										<div>First semester</div>
+										<div>
 											<ul>
-												<li><a href="#!">Company 1</a></li>
-												<li><a href="#!">Company 2</a></li>
+												<li ng-repeat = "company in companies|filter:search "><a ui-sref="company({cid: '{{company.id}}'})">{{company.name}}</a></li>
 											</ul>
 										</div>
 									</li>

@@ -37,6 +37,14 @@ psd.config(function($stateProvider, $urlRouterProvider) {
         
 });
 
+psd.controller('sideBar', ['$scope', '$http', function($scope, $http) {
+$http({method: 'GET',url: '/companies'}).then(function successCallback(response) {
+    $scope.companies = response.data;
+  }, function errorCallback(response) {
+    console.log(response);
+  });
+}]);
+
 
 psd.controller('domainCtr', ['$scope', '$http', function($scope, $http) {
 $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
