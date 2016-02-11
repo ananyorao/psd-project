@@ -15,6 +15,8 @@ module.exports = function (app, http, db) {
   var n = route('newsletter');
 
   var s = route('synopsis');
+
+  var a = route('allot');
   
 
   //domain
@@ -32,6 +34,9 @@ module.exports = function (app, http, db) {
 
   //synopsis
   app.get('/synopsis/saveall',s.save)
+
+  //allotment
+  app.get('/allot/saveall',a.save)
 
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 
