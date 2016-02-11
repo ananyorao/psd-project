@@ -11,6 +11,8 @@ module.exports = function (app, http, db) {
   var d = route('domain')
 
   var c = route('company')
+
+  var n = route('newsletter');
   
 
   //domain
@@ -22,6 +24,9 @@ module.exports = function (app, http, db) {
   app.post('/company/save', c.save)
   app.post('/company/search', c.search)
   app.get('/companies', c.showall)
+
+  //newsletter
+  app.get('/newsletter/saveall', n.save)
 
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 
