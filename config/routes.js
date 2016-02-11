@@ -13,6 +13,8 @@ module.exports = function (app, http, db) {
   var c = route('company')
 
   var n = route('newsletter');
+
+  var s = route('synopsis');
   
 
   //domain
@@ -27,6 +29,9 @@ module.exports = function (app, http, db) {
 
   //newsletter
   app.get('/newsletter/saveall', n.save)
+
+  //synopsis
+  app.get('/synopsis/saveall',s.save)
 
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 
