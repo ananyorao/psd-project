@@ -6,6 +6,7 @@ var fs = require('fs');
 var buffer = fs.readFileSync(pathToPdf);
 var student = [];
 var questions = {};
+var _ = require('underscore');
 
 pdfText(buffer, function(err, chunks) {
 	/*
@@ -47,8 +48,8 @@ pdfText(buffer, function(err, chunks) {
 	flag++;
 	
 	}
-	console.log(details[132]);
-	fs.writeFile("newsletter.json", JSON.stringify( details ), "utf8");
+	var newsletter = _.map(details, function(val, key){ return val; });
+	fs.writeFile("newsletter.json", JSON.stringify( newsletter ), "utf8");
 });
 
 var details={}
