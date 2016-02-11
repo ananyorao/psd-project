@@ -47,9 +47,9 @@ pdfText(buffer, function(err, chunks) {
 	flag++;
 	
 	}
-	console.log(details[139]);
+	console.log(details[132]);
+	fs.writeFile("newsletter.json", JSON.stringify( details ), "utf8");
 });
-
 
 var details={}
 
@@ -93,7 +93,27 @@ var extraction=function(index, student,flag){
 		}
 
 		details[flag]['id']=details[flag]['id'].substring(3,17);
+		/*if(details[flag]['id'].substring(0,1)=='(' && details[flag]['id'].substring(13,14)==')'){
+			details[flag]['id']=details[flag]['id'].substring(1,14);
+			details[flag]['id']=details[flag]['id'].substring(0,12);
 
+		}
+
+		else if(details[flag]['id'].substring(0,1)=='('){
+			details[flag]['id']=details[flag]['id'].substring(1,14);
+
+		}
+		else if(details[flag]['id'].substring(12,13)==')'){
+			details[flag]['id']=details[flag]['id'].substring(0,12);
+		}*/
+		if(details[flag]['id'].indexOf("(") !=-1){
+			var paran=details[flag]['id'].indexOf("(");
+			details[flag]['id']=details[flag]['id'].substring(paran+1,14);
+		}
+		if(details[flag]['id'].indexOf(")") !=-1){
+			var paran=details[flag]['id'].indexOf(")");
+			details[flag]['id']=details[flag]['id'].substring(0,paran);
+		}
 
 		index ++;
 		while((student[index].indexOf("Domain ")==-1 && index<student.length-2) ){

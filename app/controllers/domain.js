@@ -6,8 +6,22 @@ module.exports = function (db, utils) {
    ********/
   return {
     list: function (req, res) {
-    var domains = require('../dummy/domains');
-    res.json(domains);
+    db.Domain.find({}, function (err, domains) {
+      if(err) {
+        console.log(err);
+        return;
+      }
+      res.json(domains || [])
+    })
+    },
+
+    save: function (req, res) {
+    new db.Domain(req.body).save(function (err, company) {
+        if(err) {
+          console.log(err);
+        }
+        res.json(company);
+      })
     },
 
     listbydomain: function (req, res) {

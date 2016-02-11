@@ -3,10 +3,10 @@
 				<p>{{ company.description }}</p>
 				<p>Academic year: {{company.year}}<br/>Semester: {{company.sem}}<sup>st</sup><br/></p>
 				<h6>List of Projects:</h6>
-				<ul ng-repeat = "project in projects" class="collapsible" data-collapsible="accordion">
+				<ul ng-repeat = "project in projects" class="collapsible" data-collapsible="expandable">
 					<li>
 						<div class="collapsible-header">{{ project.name }}</div>
-						<div >
+						<div>
 							<div class="row">
 								<div class="col s5">Name</div>
 								<div class="col s7">{{ project.student.name }}</div>

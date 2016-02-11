@@ -21,11 +21,11 @@ module.exports = function (db, utils) {
     },
 
     save: function(req,res) {
-      new db.Company(req.body).save(function (err, user) {
+      new db.Company(req.body).save(function (err, company) {
         if(err) {
           console.log(err);
         }
-        res.json(user);
+        res.json(company);
       })
     },
 
