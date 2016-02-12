@@ -3,7 +3,7 @@
 
 var _ = require('underscore');
 var allot = require('../app/data/allot');
-var synopsis = require('../app/data/synopsis');
+var synopsis = require('./synopsisData');
 var fs = require('fs');
 
 
@@ -37,6 +37,6 @@ var synopsisWithCompany = _(synopsis).chain().flatten().map(function(synopsis) {
 	return synopsis;
 }).value();
 
-//fs.writeFile("companies.json", JSON.stringify( companyWithDomain ), "utf8");
+fs.writeFile("synopsisWithCompany.json", JSON.stringify( synopsisWithCompany ), "utf8");
 
-console.log(companyWithDomain.length);
+//console.log(synopsisWithCompany);

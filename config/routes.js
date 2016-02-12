@@ -28,7 +28,7 @@ module.exports = function (app, http, db) {
   app.get('/company/saveAll', c.saveAll) //Batch save all companies
   app.post('/company/save', c.save)
   app.post('/company/search', c.search)
-  app.get('/companies', c.showall)
+  app.get('/company/list/:cid', c.show)
 
   //newsletter
   app.get('/newsletter/saveall', n.save) //Batch save all the newsletter

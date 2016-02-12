@@ -25,13 +25,29 @@ module.exports = function (db, utils) {
     },
 
     show: function(req,res) {
-      var project = require('../dummy/project');
-      res.json(project);
-    },
-
-    showall: function(req,res) {
-      var companies = require('../dummy/allcompany');
-      res.json(companies);
+      var async = require('async');
+      async.waterfall([
+          function(callback) {
+            var cid = req.params.cid;
+              db.Company.find({'_id': cid}, function(err,data) {
+                if(err) {
+                  console.log(err);
+                }
+                callback(null, data);
+              })
+          },
+          function(data,callback) {
+            var companyName = data[0].name;
+            db.Synopsis.find({'company' : companyName}, function(err,data) {
+              callback(null, data);
+            })
+          }
+        ], function(err, result) {
+          if(err) {
+            console.log(err);
+          }
+          res.json(result || []);
+        });
     },
 
     save: function(req,res) {
