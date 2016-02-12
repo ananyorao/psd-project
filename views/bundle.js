@@ -22,9 +22,8 @@ psd.config(function($stateProvider, $urlRouterProvider) {
             controller: 'domainCtr'
         })
         
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('domain', {
-            url: '/domain/:did',
+            url: '/domain/:dname',
             templateUrl: 'domainDetail.html',
             controller: 'domainDetailCtr'     
         })
@@ -55,14 +54,13 @@ $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
   });
 }]);
 
-psd.controller('domainDetailCtr', ['$scope', '$http', function($scope, $http) {
-var did= $scope.did;
+psd.controller('domainDetailCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+var domainName = $stateParams.dname;
 $scope.domain = {};
 $scope.companies = [];
-$http({method: 'GET', url: '/domain/'+did}).then(function successCallback(response) {
-    var resp = response.data;
-    $scope.domain.name = resp.domain;
-    $scope.companies = resp.company;
+$http({method: 'GET', url: '/domain/list/'+domainName}).then(function successCallback(response) {
+    $scope.domain.name = domainName;
+    $scope.companies = response.data;
   }, function errorCallback(response) {
     console.log(response);
   });

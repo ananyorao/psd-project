@@ -5,9 +5,23 @@ module.exports = function (db, utils) {
    *COMPANY *
    ********/
   return {
-    list: function (req, res) {
-    var company = require('../dummy/company');
-    res.json(company);
+    listAll: function (req, res) {
+    db.Company.find({ }, function (err, companies) {
+      if(err) {
+        console.log(err)
+      }
+      res.json(companies || [])
+    })
+    },
+
+    saveAll: function(req,res) {
+      var companies = require('../data/companies');
+      db.Company.collection.insert(companies, function (err, data) {
+        if(err) {
+          console.log(err);
+        }
+        res.json(data);
+      })
     },
 
     show: function(req,res) {

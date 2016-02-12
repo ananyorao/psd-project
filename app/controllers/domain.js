@@ -6,13 +6,8 @@ module.exports = function (db, utils) {
    ********/
   return {
     list: function (req, res) {
-    db.Domain.find({}, function (err, domains) {
-      if(err) {
-        console.log(err);
-        return;
-      }
-      res.json(domains || [])
-    })
+    var domains = require('../data/domains');
+    res.json(domains);
     },
 
     save: function (req, res) {
@@ -25,8 +20,14 @@ module.exports = function (db, utils) {
     },
 
     listbydomain: function (req, res) {
-    var companies = require('../dummy/companyByDomain');
-    res.json(companies);
+    var domainName = req.params.dname;
+    console.log(domainName);
+    db.Company.find({ 'domain' : domainName }, function (err, users) {
+      if(err) {
+        console.log(err);
+      }
+      res.json(users || [])
+    })
     }
   }
 }

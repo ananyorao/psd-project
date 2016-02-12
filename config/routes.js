@@ -20,23 +20,24 @@ module.exports = function (app, http, db) {
   
 
   //domain
-  app.get('/domains', d.list)
-  app.get('/domain/:did', d.listbydomain) 
+  app.get('/domains', d.list) //List all the domains from the file
+  app.get('/domain/list/:dname', d.listbydomain) 
 
   //company
-  app.get('/company/:cid', c.show)
+  app.get('/companies', c.listAll) //List all the companies frolm the db
+  app.get('/company/saveAll', c.saveAll) //Batch save all companies
   app.post('/company/save', c.save)
   app.post('/company/search', c.search)
   app.get('/companies', c.showall)
 
   //newsletter
-  app.get('/newsletter/saveall', n.save)
+  app.get('/newsletter/saveall', n.save) //Batch save all the newsletter
 
   //synopsis
-  app.get('/synopsis/saveall',s.save)
+  app.get('/synopsis/saveall',s.save) //Batch save all the synopsis data
 
   //allotment
-  app.get('/allot/saveall',a.save)
+  app.get('/allot/saveall',a.save) //Batch save all the allotment data
 
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 
