@@ -4,7 +4,7 @@ require('materialize-css/dist/js/materialize.js');            //Jquery import
 require('angular');
 //var preparelist = require('./prepare-list.js');             //AngularJS import
 require('angular-ui-router');	//Angular-UI-Router import
-var angularMaterialize = require('angular-materialize');
+//var angularMaterialize = require('angular-materialize');
 
 var psd = angular.module('psd', ['ui.router']);
 
@@ -56,6 +56,18 @@ psd.controller('domainDetailCtr', ['$scope', '$http', '$stateParams', function($
 var domainName = $stateParams.dname;
 $scope.domain = {};
 $scope.companies = [];
+$scope.editable = "More details about the company coming soon!";
+$scope.expand = function(company) {
+  $scope.showModal = true;
+  $scope.stipend = company.stipend;
+  if(!(company.editable === "")) {
+    $scope.editable = company.editable;
+  }
+  $scope.modalHeader = company.name;
+}
+$scope.closeModal = function() {
+  $scope.showModal = false;
+}
 $http({method: 'GET', url: '/domain/list/'+domainName}).then(function successCallback(response) {
     $scope.domain.name = domainName;
     $scope.companies = response.data;

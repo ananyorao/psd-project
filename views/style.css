@@ -13,7 +13,7 @@
 	padding-left: 20px !important;
 	margin-left: 0 !important;
 	margin-right: 0 !important;
-	margin-bottom: 10px !important
+	margin-bottom: 5px !important
 }
 
 .collapsible{
@@ -32,4 +32,17 @@
 }
 .collapsible .collapsible-header:hover{
 	color: #1565c0 !important;
+	margin-bottom: 0px !important
+}
+
+.companyList {
+	border-bottom: solid #c3c3c3;
+}
+
+.companyEditable {
+	margin-bottom: 0 !important;
+}
+
+.companyName {
+	margin-top: 15px !important;
 }
