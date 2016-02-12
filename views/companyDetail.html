@@ -5,15 +5,19 @@
 				<h6>List of Projects:</h6>
 				<ul ng-repeat = "project in projects" class="collapsible" data-collapsible="expandable">
 					<li>
-						<div class="collapsible-header">{{ project.name }}</div>
+						<div class="collapsible-header">{{ project.projectTitle }}</div>
 						<div>
 							<div class="row">
 								<div class="col s5">Name</div>
-								<div class="col s7">{{ project.student.name }}</div>
+								<div class="col s7">{{ project.name }}</div>
 							</div>
 							<div class="row">
 								<div class="col s5">ID Number</div>
-								<div class="col s7">{{ project.student.id }}</div>
+								<div class="col s7">{{ project.idno }}</div>
+							</div>
+							<div class="row">
+								<div class="col s5">Summary</div>
+								<div class="col s7">{{ project.summary}}</div>
 							</div>
 							
 							<div class="row">

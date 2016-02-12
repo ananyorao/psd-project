@@ -64,19 +64,14 @@ $http({method: 'GET', url: '/domain/list/'+domainName}).then(function successCal
   });
 }]);
 
-psd.controller('companyDetailCtr', ['$scope', '$http', function($scope, $http) {
-var cid= $scope.cid;
+psd.controller('companyDetailCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+var cid= $stateParams.cid;
 $scope.domain = {};
 $scope.company = {};
 $scope.projects = [];
-$http({method: 'GET', url: '/company/'+cid}).then(function successCallback(response) {
+$http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(response) {
     var data = response.data;
-    $scope.domain.name = data.domain;
-    $scope.company.name = data.company.name;
-    $scope.company.description = data.company.description;
-    $scope.company.year = data.company.year;
-    $scope.company.sem = data.company.semester;
-    $scope.projects = data.projects;
+    $scope.projects = data;
   }, function errorCallback(response) {
     console.log(response);
   });
