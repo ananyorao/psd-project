@@ -32,6 +32,8 @@ module.exports = function (db, utils) {
               db.Company.find({'_id': cid}, function(err,data) {
                 if(err) {
                   console.log(err);
+                  res.status(404).json({ error:'Invalid GET request' });
+                  return;
                 }
                 callback(null, data);
               })
