@@ -1,5 +1,9 @@
+//Total number of synopsis is 322
+//Total number of companies is 178
+
 var _ = require('underscore');
 var allot = require('../app/data/allot');
+var synopsis = require('../app/data/synopsis');
 var fs = require('fs');
 
 
@@ -12,6 +16,27 @@ var companyWithDomain = _(allot).chain().flatten().indexBy('StationName').map(fu
 	company.stipend = val.Stipend;
 	company.editable = "";
 	return company;
-});
+}).value();
 
-fs.writeFile("companies.json", JSON.stringify( companyWithDomain ), "utf8");
+var companyWithIds = _(allot).chain().flatten().map(function(val,key) {
+	var company = {};
+	company.name = val.StationName;
+	company.idno = val.IDNumber;
+	return company;
+}).value();
+
+
+var synopsisWithCompany = _(synopsis).chain().flatten().map(function(synopsis) {
+	var id = synopsis.idno;
+	for(i=0; i< companyWithIds.length; i++) {
+		var idFromAllot = companyWithIds[i].idno;
+		if(idFromAllot.indexOf(synopsis.idno) != -1) {
+			synopsis.company = companyWithIds[i].name;
+		}
+	}
+	return synopsis;
+}).value();
+
+//fs.writeFile("companies.json", JSON.stringify( companyWithDomain ), "utf8");
+
+console.log(companyWithDomain.length);
