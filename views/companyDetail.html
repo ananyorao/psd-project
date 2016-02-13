@@ -1,11 +1,19 @@
-<br/><h4>Tata Steel</h4><br/>
+
 				<h5><strong>{{company.name}}</strong></h5>
-				<p>{{ company.description }}</p>
-				<p>Academic year: {{company.year}}<br/>Semester: {{company.sem}}<sup>st</sup><br/></p>
-				<h6>List of Projects:</h6>
-				<ul ng-repeat = "project in projects" class="collapsible" data-collapsible="expandable">
+				<p>Academic year: 2015 - 2016<br/>Semester: 1<sup>st</sup><br/></p>
+				<div class="row">
+					<form>
+						<div class="input-field">
+							<input id="search" type="search" placeholder="Search Project Title or Student..." required ng-model="searchProject">
+						</div>
+						<select ng-model="filterByArea" ng-options="subArea for subArea in subAreas" style="display:block">
+							
+				    	</select>
+					</form>
+				</div>
+				<ul ng-repeat = "project in projects|filter:searchProject|filter:filterByArea " class="collapsible" data-collapsible="expandable">
 					<li>
-						<div class="collapsible-header">{{ project.projectTitle }}</div>
+						<div style="font-size:medium; font-weight: bold">{{ project.projectTitle }}</div>
 						<div>
 							<div class="row">
 								<div class="col s5">Name</div>
@@ -16,15 +24,40 @@
 								<div class="col s7">{{ project.idno }}</div>
 							</div>
 							<div class="row">
-								<div class="col s5">Summary</div>
-								<div class="col s7">{{ project.summary}}</div>
+								<div class="col s5">Broad-Area</div>
+								<div class="col s7">{{ project.broadArea }}</div>
+							</div>
+							<div class="row">
+								<div class="col s5">Sub-Area</div>
+								<div class="col s7">{{ project.subArea }}</div>
+							</div>
+							<div class="row">
+								<div class="col s5">Objective of work</div>
+								<div class="col s7">{{ project.objective | limitTo: 220 }}{{project.objective.length > 220 ? '...' : ''}}
+									<div><a href="" ng-click="expand(project)">More Information</a></div></div>
 							</div>
 							
 							<div class="row">
-								<strong><p>Project Synopsis</p></strong>
 								<p> {{ project.body }} </p>
-								<p><a href="#!">Download Synopsis</a></p>
+								<!--<p><a href="#!">Download Synopsis</a></p>-->
 							</div>
 						</div>
 					</li>
 				</ul>
+
+				<div ng-show="showModal" class="modal bottom-sheet" style="z-index: 1005; display: block; opacity: 1; bottom: 0px; box-shadow:0px; 0 1px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21); width:90%; margin:auto; height:550px; max-height:80%">
+ 		<div class="modal-footer">
+      <a ng-click = "closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    <div class="modal-content">
+      <h5>Objective</h5>
+      <p>{{objective}}</p>
+      <h5>Nature of work</h5>
+      <p>{{natureOfWork}}</p>
+      <h5>Summary</h5>
+      <p>{{summary}}</p>
+      <h5>Furture Scope</h5>
+      <p>{{futureScope}}</p>
+    </div>
+  </div>
+ 	<div ng-click="closeModal()" ng-show="showModal" class="lean-overlay" id="materialize-lean-overlay-2" style="z-index: 1002; display: block; opacity: 0.5;"></div>

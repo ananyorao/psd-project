@@ -5,6 +5,7 @@ require('angular');
 //var preparelist = require('./prepare-list.js');             //AngularJS import
 require('angular-ui-router');	//Angular-UI-Router import
 //var angularMaterialize = require('angular-materialize');
+var _ = require('underscore');
 
 var psd = angular.module('psd', ['ui.router']);
 
@@ -81,9 +82,22 @@ var cid= $stateParams.cid;
 $scope.domain = {};
 $scope.company = {};
 $scope.projects = [];
+$scope.closeModal = function() {
+  $scope.showModal = false;
+}
 $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(response) {
     var data = response.data;
     $scope.projects = data;
+    $scope.company.name = data[0].company;
+    $scope.expand = function(project) {
+      $scope.showModal = true;
+      $scope.summary = project.summary;
+      $scope.objective = project.objective;
+      $scope.natureOfWork = project.natureOfWork;
+      $scope.futureScope = project.futureScope;
+    }
+    $scope.subAreas = _(data).chain().flatten().pluck('broadArea').unique().value();
+
   }, function errorCallback(response) {
     console.log(response);
   });

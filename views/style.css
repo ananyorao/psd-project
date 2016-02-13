@@ -46,3 +46,7 @@
 .companyName {
 	margin-top: 15px !important;
 }
+
+.companyListItem {
+	border-bottom: 1px solid #c3c3c3;
+}
