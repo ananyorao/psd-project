@@ -26,6 +26,7 @@ module.exports = function (db, utils) {
 
     show: function(req,res) {
       var async = require('async');
+      var _ = require('underscore');
       async.waterfall([
           function(callback) {
             var cid = req.params.cid;
@@ -41,12 +42,14 @@ module.exports = function (db, utils) {
           function(data,callback) {
             var companyName = data[0].name;
             db.Synopsis.find({'company' : companyName}).lean().exec(function(err,data) {
+              _(data).chain().flatten().map(function(synopsis) {
+                synopsis.newsletter = "";
+              });
               callback(null, data);
             });
           },
           function(data,callback) {
             var newsletterIndex = [];
-            var _ = require('underscore');
             var ids = _(data).chain().flatten().pluck('idno').unique().value();
             
             db.Newsletter.find({id: {$in: ids}}).lean().exec(function(err,newsletters) {
@@ -60,13 +63,10 @@ module.exports = function (db, utils) {
                 var idFromNewsletter = newsletters[i].id;
                 if(idFromNewsletter.indexOf(synopsis.idno) != -1) {
                   synopsis.newsletter = newsletters[i].feedback;
-                } else {
-                  synopsis.newsletter = "";
                 }
               }
                 return synopsis;
               }).value();
-              console.log(synopsisWithNewsletter);
               callback(null,synopsisWithNewsletter);
             });
           }
