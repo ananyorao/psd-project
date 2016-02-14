@@ -21,14 +21,16 @@ module.exports = function (app, http, db) {
 
   //domain
   app.get('/domains', d.list) //List all the domains from the file
-  app.get('/domain/list/:dname', d.listbydomain) 
+  app.get('/domain/list/:dname', d.listbydomain)  //list by domain
 
   //company
   app.get('/companies', c.listAll) //List all the companies frolm the db
   app.get('/company/saveAll', c.saveAll) //Batch save all companies
+  app.get('/company/get/:cid', c.list) //get company by id
   app.post('/company/save', c.save)
   app.post('/company/search', c.search)
-  app.get('/company/list/:cid', c.show)
+  app.get('/company/list/:cid', c.show) //projects of a companyu
+  app.post('/company/edit/:cid', c.edit) //update editable of a company
 
   //newsletter
   app.get('/newsletter/saveall', n.save) //Batch save all the newsletter
@@ -53,6 +55,10 @@ module.exports = function (app, http, db) {
 
   app.get('/companyDetail.html', function(req, res) {
     res.sendfile(path.resolve('views/companyDetail.html')); 
+  });
+
+  app.get('/companyEdit.html', function(req, res) {
+    res.sendfile(path.resolve('views/companyEdit.html')); 
   });
 
   app.get('/css/*', function(req, res) {

@@ -1583,6 +1583,12 @@ psd.config(function($stateProvider, $urlRouterProvider) {
             url: '/company/:cid',
             templateUrl: 'companyDetail.html',
             controller: 'companyDetailCtr'     
+        })
+
+        .state('companyEdit', {
+            url: '/companyedit/:ceid',
+            templateUrl: 'companyEdit.html',
+            controller: 'companyEditCtr'     
         });
         
 });
@@ -1610,6 +1616,25 @@ $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
   });
 }]);
 
+psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+  var data = {};
+  data.cid = $stateParams.ceid;
+  $scope.editable = "";
+  $http({method: 'GET', url: '/company/get/'+data.cid}).then(function successCallback(response) {
+    $scope.editable = response.data[0].editable;
+  }, function errorCallback(response) {
+    console.log(response);
+  });
+  $scope.updateCompany = function() {
+    data.content = $scope.editable;
+    $http.post('/company/edit/'+data.cid, data).then(function successCallback(response) {
+    console.log(response);
+  }, function errorCallback(response) {
+    console.log(response);
+  });
+  }
+}]);
+
 psd.controller('domainDetailCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
 var domainName = $stateParams.dname;
 $scope.domain = {};
@@ -1618,6 +1643,7 @@ $scope.editable = "More details about the company coming soon!";
 $scope.expand = function(company) {
   $scope.showModal = true;
   $scope.stipend = company.stipend;
+  $scope.companyId = company._id;
   if(!(company.editable === "")) {
     $scope.editable = company.editable;
   }

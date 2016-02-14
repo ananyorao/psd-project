@@ -9,6 +9,7 @@ var questions = {};
 var _ = require('underscore');
 
 pdfText(buffer, function(err, chunks) {
+	console.log(chunks);
 	/*
 	student.name = chunks[3];
 	student.id = chunks[5];

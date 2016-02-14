@@ -14,6 +14,16 @@ module.exports = function (db, utils) {
     })
     },
 
+    list: function (req, res) {
+    var cid = req.params.cid;
+    db.Company.find({ _id : cid}, function (err, companies) {
+      if(err) {
+        console.log(err)
+      }
+      res.json(companies || [])
+    })
+    },
+
     saveAll: function(req,res) {
       var companies = require('../data/companies');
       db.Company.collection.insert(companies, function (err, data) {
@@ -76,6 +86,24 @@ module.exports = function (db, utils) {
           }
           res.json(result || []);
         });
+    },
+
+    edit: function(req,res) {
+      var cid = req.body.cid;
+      var content = req.body.content;
+      db.Company.update({_id: cid}, {editable:content}, function(err,affected){
+        if(err) {
+          console.log(err);
+          return;
+        }
+        db.Company.find({_id: cid}, function(err,resp){
+          if(err) {
+            console.log(err);
+            return;
+          }
+          res.json(resp || []);
+        }); 
+      });
     },
 
     save: function(req,res) {
