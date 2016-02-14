@@ -9,7 +9,7 @@
 6 silly lifecycle psd@0.0.1~prestart: no script for prestart, continuing
 7 info lifecycle psd@0.0.1~start: psd@0.0.1
 8 verbose lifecycle psd@0.0.1~start: unsafe-perm in lifecycle true
-9 verbose lifecycle psd@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/adheeshbhatia/psd/psd-project/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+9 verbose lifecycle psd@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/adheeshbhatia/psd/psd-project/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin
 10 verbose lifecycle psd@0.0.1~start: CWD: /Users/adheeshbhatia/psd/psd-project
 11 silly lifecycle psd@0.0.1~start: Args: [ '-c', 'clear;node app.js' ]
 12 silly lifecycle psd@0.0.1~start: Returned: code: 1  signal: null
