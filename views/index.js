@@ -43,6 +43,11 @@ $http({method: 'GET',url: '/companies'}).then(function successCallback(response)
   });
 }]);
 
+psd.run(function($rootScope){
+  $rootScope.$on('$stateChangeSuccess', function() {
+   document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
+});
 
 psd.controller('domainCtr', ['$scope', '$http', function($scope, $http) {
 $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
@@ -96,6 +101,7 @@ $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(
       $scope.natureOfWork = project.natureOfWork;
       $scope.futureScope = project.futureScope;
       $scope.newsletter = project.newsletter;
+      $scope.projectContribution = project.projectContribution;
       $scope.showNewsletter = true;
       if(project.newsletter === "") {
         $scope.showNewsletter = false;
