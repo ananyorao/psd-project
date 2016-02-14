@@ -95,6 +95,11 @@ $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(
       $scope.objective = project.objective;
       $scope.natureOfWork = project.natureOfWork;
       $scope.futureScope = project.futureScope;
+      $scope.newsletter = project.newsletter;
+      $scope.showNewsletter = true;
+      if(project.newsletter === "") {
+        $scope.showNewsletter = false;
+      }
     }
     $scope.subAreas = _(data).chain().flatten().pluck('broadArea').unique().value();
 
