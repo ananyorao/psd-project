@@ -3,4 +3,10 @@
 					<ul class="collection" >
 						<a ui-sref="domain({dname: '{{domain.name}}'})" ng-repeat="domain in domains"><li class="collection-item hoverable">{{ domain.name }}</li></a>
 					</ul>
+					<div class="loading" ng-show="startLoading">
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					</div>
 				</div>
