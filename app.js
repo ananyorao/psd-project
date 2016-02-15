@@ -4,6 +4,9 @@ var config   = require('./config')
   , fs       = require('fs')
   , db       = {}
 
+var filter = require('content-filter')
+var helmet = require('helmet')
+
 // connect mongoose
 mongoose.connect(config.db, { server: { keepAlive: 1, auto_reconnect: true } })
 var conn = mongoose.connection
@@ -31,6 +34,9 @@ conn.on('open', function () {
   // create app
   var app   = express()
     , http  = require('http').createServer(app)
+
+  app.use(filter());
+  app.use(helmet());
 
   // config app
   require('./config/express')(app, config)

@@ -70,15 +70,18 @@ psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($s
   $scope.editable = "";
   $http({method: 'GET', url: '/company/get/'+data.cid}).then(function successCallback(response) {
     $scope.editable = response.data[0].editable;
+    $scope.name = response.data[0].name;
   }, function errorCallback(response) {
     console.log(response);
   });
   $scope.updateCompany = function() {
     data.content = $scope.editable;
     $http.post('/company/edit/'+data.cid, data).then(function successCallback(response) {
+    alert("Succesfully updated");
     console.log(response);
   }, function errorCallback(response) {
     console.log(response);
+    alert("Error, Please try again later");
   });
   }
 }]);
@@ -87,13 +90,14 @@ psd.controller('domainDetailCtr', ['$scope', '$http', '$stateParams', function($
 var domainName = $stateParams.dname;
 $scope.domain = {};
 $scope.companies = [];
-$scope.editable = "More details about the company coming soon!";
 $scope.expand = function(company) {
   $scope.showModal = true;
   $scope.stipend = company.stipend;
   $scope.companyId = company._id;
   if(!(company.editable === "")) {
     $scope.editable = company.editable;
+  } else {
+    $scope.editable = "More details about the company coming soon!";
   }
   $scope.modalHeader = company.name;
 }

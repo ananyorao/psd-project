@@ -49,6 +49,21 @@ module.exports = function (db, utils) {
                 callback(null, data);
               });
           },
+          function(data, callback) {
+            console.log(data);
+            var id = data[0]._id;
+            var count = data[0].viewCount;
+            if(typeof count === 'undefined') {
+              count = 0;
+            }
+            db.Company.update({_id: id}, {viewCount:count+1}, function(err,affected){
+              if(err) {
+                console.log(err);
+                return;
+              }
+              callback(null, data);
+            });
+          },
           function(data,callback) {
             var companyName = data[0].name;
             db.Synopsis.find({'company' : companyName}).lean().exec(function(err,data) {

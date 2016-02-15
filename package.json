@@ -11,8 +11,10 @@
     "async": "^1.5.2",
     "bcrypt": "^0.8.5",
     "connect-mongo": "~0.4.0",
+    "content-filter": "^1.0.22",
     "ejs": "~0.8.5",
     "express": "~3.4.8",
+    "helmet": "^1.1.0",
     "mongoose": "^4.3.6",
     "pdf-text": "^0.4.0",
     "teqlabs-testify": "~0.2.0"

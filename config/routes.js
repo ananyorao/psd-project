@@ -61,6 +61,10 @@ module.exports = function (app, http, db) {
     res.sendfile(path.resolve('views/companyEdit.html')); 
   });
 
+  app.get('/faculty.html', function(req, res) {
+    res.sendfile(path.resolve('views/faculty.html')); 
+  });
+
   app.get('/css/*', function(req, res) {
     res.sendfile(path.resolve('views/style.css')); 
   });
