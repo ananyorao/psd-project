@@ -1,7 +1,7 @@
 var path = require('path')
   , rootPath = path.normalize(__dirname + '/..')
   , env = process.env.NODE_ENV || 'development'
-  , port = 8000
+  , port = 80
   , admin = {
     "role": "admin",
     "email": "adheeshbhatia@gmail.com",

@@ -17,7 +17,7 @@ module.exports = function (mongoose, config) {
     summary: { type: String, default:'' },
     projectContribution: { type: String, default:'' },
     futureScope: { type: String, default:'' },
-    company: { type: String, required: true, unique : true, dropDups: true },
+    company: { type: String, required: true },
     viewCount: { type : Number , default : 0 },
     created: { type: Date, default:Date.now }
   }, { versionKey:false })
