@@ -6059,6 +6059,9 @@ psd.config(function($stateProvider, $urlRouterProvider) {
 psd.controller('sideBar', ['$scope', '$http', function($scope, $http) {
 $http({method: 'GET',url: '/companies'}).then(function successCallback(response) {
     $scope.companies = response.data;
+    $scope.mostViewed = _.sortBy(response.data, function(o) { return o.viewCount; })
+    $scope.mostViewed.reverse();
+    console.log($scope.mostViewed);
   }, function errorCallback(response) {
     console.log(response);
   });

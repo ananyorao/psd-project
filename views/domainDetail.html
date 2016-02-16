@@ -3,6 +3,8 @@
  					<li class= "companyList" ng-repeat = "company in companies">
  						<div class="companyName" style="font-size:medium; font-weight: bold">{{ company.name }}</div>
  						<div>
+            <div>{{ company.viewCount }} views</div>
+            <div>
  							<div class="row companyEditable">
  								<p ><a class="waves-effect waves-green btn-flat" ui-sref = "company({cid:'{{company._id}}'})" href="#">Show Projects</a><a class="waves-effect waves-green btn-flat" ng-click="expand(company)" style="margin-left:5px;">Company Details</a></p>
  							</div>
