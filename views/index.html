@@ -18,7 +18,7 @@
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="http://psd.bits-pilani.ac.in/">PSD Website</a></li>
-					<li><a href="#">Faculty Details</a></li>
+					<!--<li><a href="#">Faculty Details</a></li>-->
 					<li><a href="#">Logout</a></li>
 				</ul>
 				<ul class="side-nav" id="mobile-demo">
@@ -64,7 +64,7 @@
 				</div>
 			</div>
 		</div>
-		<footer class="page-footer blue darken-3">
+		<footer ng-controller="sideBar" class="page-footer blue darken-3">
 			<div class="container">
 				<div class="row">
 					<div class="col l6 s12">
@@ -74,10 +74,7 @@
 					<div class="col l4 offset-l2 s12">
 						<h5 class="white-text">Most Viewed Companies</h5>
 						<ul>
-							<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-							<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-							<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-							<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+							<li class="companyListItem" ng-repeat = "company in mostViewed|limitTo:5"><a class="grey-text text-lighten-3" ui-sref="company({cid: '{{company._id}}'})"href="#!">{{company.name}}</a></li>
 						</ul>
 					</div>
 				</div>

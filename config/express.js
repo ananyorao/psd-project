@@ -14,7 +14,8 @@ for (k in interfaces) {
 
 module.exports = function (app, config) {
  
-  config.host = "127.0.0.1";
+  config.host = addrs.pop()
+  //config.host = "127.0.0.1"
 
   // API session store
   var MongoStore = require('connect-mongo')(express)

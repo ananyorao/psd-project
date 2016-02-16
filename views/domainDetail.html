@@ -3,6 +3,8 @@
  					<li class= "companyList" ng-repeat = "company in companies">
  						<div class="companyName" style="font-size:medium; font-weight: bold">{{ company.name }}</div>
  						<div>
+            <div>{{ company.viewCount }} views</div>
+            <div>
  							<div class="row companyEditable">
  								<p ><a class="waves-effect waves-green btn-flat" ui-sref = "company({cid:'{{company._id}}'})" href="#">Show Projects</a><a class="waves-effect waves-green btn-flat" ng-click="expand(company)" style="margin-left:5px;">Company Details</a></p>
  							</div>
@@ -10,6 +12,12 @@
  						<!-- Modal Structure -->
  					</li>
  			</ul>
+ 			<div class="loading" ng-show="startLoading">
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					</div>
  			<div ng-show="showModal" class="modal bottom-sheet" style="z-index: 1005; display: block; opacity: 1; bottom: 0px; box-shadow:0px; 0 1px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21); width:90%; margin:auto; height:550px; max-height:80%">
  		<div class="modal-footer">
       <a ng-click = "closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>

@@ -8,6 +8,8 @@
     "test": "clear;node tests/main.js"
   },
   "dependencies": {
+    "angular-animate": "^1.5.0",
+    "angular-loading-bar": "^0.8.0",
     "async": "^1.5.2",
     "bcrypt": "^0.8.5",
     "connect-mongo": "~0.4.0",

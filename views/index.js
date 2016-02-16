@@ -6,8 +6,9 @@ require('angular');
 require('angular-ui-router');	//Angular-UI-Router import
 //var angularMaterialize = require('angular-materialize');
 var _ = require('underscore');
+require('angular-loading-bar');
 
-var psd = angular.module('psd', ['ui.router']);
+var psd = angular.module('psd', ['ui.router','angular-loading-bar', require('angular-animate')]);
 
 psd.config(function($stateProvider, $urlRouterProvider) {
     
@@ -44,6 +45,9 @@ psd.config(function($stateProvider, $urlRouterProvider) {
 psd.controller('sideBar', ['$scope', '$http', function($scope, $http) {
 $http({method: 'GET',url: '/companies'}).then(function successCallback(response) {
     $scope.companies = response.data;
+    $scope.mostViewed = _.sortBy(response.data, function(o) { return o.viewCount; })
+    $scope.mostViewed.reverse();
+    console.log($scope.mostViewed);
   }, function errorCallback(response) {
     console.log(response);
   });
@@ -56,10 +60,13 @@ psd.run(function($rootScope){
 });
 
 psd.controller('domainCtr', ['$scope', '$http', function($scope, $http) {
+$scope.startLoading = true;
 $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
     var resp = response.data;
     $scope.domains = resp;
+    $scope.startLoading = false;
   }, function errorCallback(response) {
+    alert('Try again later');
     console.log(response);
   });
 }]);
@@ -79,6 +86,7 @@ psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($s
     $http.post('/company/edit/'+data.cid, data).then(function successCallback(response) {
     alert("Succesfully updated");
     console.log(response);
+    $scope.startLoading = false;
   }, function errorCallback(response) {
     console.log(response);
     alert("Error, Please try again later");
@@ -104,10 +112,13 @@ $scope.expand = function(company) {
 $scope.closeModal = function() {
   $scope.showModal = false;
 }
+$scope.startLoading = true;
 $http({method: 'GET', url: '/domain/list/'+domainName}).then(function successCallback(response) {
     $scope.domain.name = domainName;
     $scope.companies = response.data;
+    $scope.startLoading = false;
   }, function errorCallback(response) {
+    alert('Try again later');
     console.log(response);
   });
 }]);
@@ -120,6 +131,7 @@ $scope.projects = [];
 $scope.closeModal = function() {
   $scope.showModal = false;
 }
+$scope.startLoading = true;
 $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(response) {
     var data = response.data;
     $scope.projects = data;
@@ -137,9 +149,11 @@ $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(
         $scope.showNewsletter = false;
       }
     }
+    $scope.startLoading = false;
     $scope.subAreas = _(data).chain().flatten().pluck('broadArea').unique().value();
 
   }, function errorCallback(response) {
     console.log(response);
+    alert('Try again later');
   });
 }]);
