@@ -1,4 +1,4 @@
 views/node_modules
-node_modules
+node_modules/*
 aashray/node_modules
 npm-debug.log
