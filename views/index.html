@@ -59,7 +59,7 @@
 				<div class="row">
 					<ul class="collapsible" data-collapsible="expandable">
 						
-												<li class="companyListItem" ng-repeat = "company in companies|filter:search "><a ui-sref="company({cid: '{{company._id}}'})">{{company.name}}</a></li>
+												<li class="companyListItem" ng-repeat = "company in companies|filter:search | orderBy:'name' "><a ui-sref="company({cid: '{{company._id}}'})">{{company.name}}</a></li>
 					</ul>
 				</div>
 			</div>

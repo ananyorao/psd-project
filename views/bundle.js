@@ -6077,6 +6077,19 @@ psd.controller('domainCtr', ['$scope', '$http', function($scope, $http) {
 $scope.startLoading = true;
 $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
     var resp = response.data;
+    for(var i = 0; i< resp.length; i++) {
+      console.log(resp[i].name);
+      switch(resp[i].name) {
+      case "Eco Finance":
+        resp[i].dname = "Economics, Finance & Management";
+        break;
+      case "Electrical Electronics":
+        resp[i].dname = "Electrical, Electronics, Communication & Instrumentation";
+        break;
+      default:
+        resp[i].dname = resp[i].name;
+      }
+    }
     $scope.domains = resp;
     $scope.startLoading = false;
   }, function errorCallback(response) {
