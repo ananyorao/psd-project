@@ -104,9 +104,20 @@ module.exports = function (db, utils) {
     },
 
     edit: function(req,res) {
+      var sanitizer = require('sanitizer');
+      if(typeof req.headers.api_token === "undefined") {
+        utils.error(res, 401, 'Invalid api_token, please login!');
+        return;
+      }
+      var token = req.headers.api_token;
+      var decoded = jwt.verify(token, 'ajsfasknfka');
       var cid = req.body.cid;
-      var content = req.body.content;
-      db.Company.update({_id: cid}, {editable:content}, function(err,affected){
+      var content = {};
+      console.log(req.body.content.coreBusiness);
+      content.coreBusiness = sanitizer.sanitize(sanitizer.escape(req.body.content.coreBusiness));
+      content.projectNature = sanitizer.sanitize(sanitizer.escape(req.body.content.projectNature));
+      content.companyAddress = sanitizer.sanitize(sanitizer.escape(req.body.content.companyAddress));
+      db.Company.update({_id: cid}, {editable:JSON.stringify(content)}, function(err,affected){
         if(err) {
           console.log(err);
           return;

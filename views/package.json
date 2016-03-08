@@ -27,6 +27,7 @@
   "devDependencies": {
     "angular-materialize": "^0.1.2",
     "hammerjs": "^2.0.6",
-    "materialize-css": "^0.97.5"
+    "materialize-css": "^0.97.5",
+    "sanitizer": "^0.1.3"
   }
 }

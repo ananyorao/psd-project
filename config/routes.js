@@ -17,6 +17,8 @@ module.exports = function (app, http, db) {
   var s = route('synopsis');
 
   var a = route('allot');
+
+  var f = route('faculty');
   
 
   //domain
@@ -41,8 +43,16 @@ module.exports = function (app, http, db) {
   //allotment
   app.get('/allot/saveall',a.save) //Batch save all the allotment data
 
+  //faculty
+  app.post('/faculty/login', f.login) //Login faculty with a common password
+  app.post('/faculty/me', f.me) //Get faculty details
+
   app.get('/', function(req, res) {
     res.sendfile(path.resolve('views/index.html')); 
+  });
+
+  app.get('/login.html', function(req, res) {
+    res.sendfile(path.resolve('views/login.html')); 
   });
 
   app.get('/domain.html', function(req, res) {

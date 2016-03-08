@@ -114,14 +114,18 @@ psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($s
     jsonData.coreBusiness = $scope.editable_1;
     jsonData.projectNature = $scope.editable_2;
     jsonData.companyAddress = $scope.editable_3;
-    data.content = JSON.stringify(jsonData);
+    data.content = jsonData;
     $http.post('/company/edit/'+data.cid, data).then(function successCallback(response) {
     alert("Succesfully updated");
     console.log(response);
     $scope.startLoading = false;
   }, function errorCallback(response) {
     console.log(response);
-    alert("Error, Please try again later");
+    if(response.status === 401) {
+      alert("Unauthorised access, please login");
+    } else {
+      alert("Error, Please try again later");
+    }
   });
   }
 }]);
