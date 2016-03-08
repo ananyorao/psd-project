@@ -6,7 +6,8 @@
             <div>{{ company.viewCount }} views</div>
             <div>
  							<div class="row companyEditable">
- 								<p ><a class="waves-effect waves-green btn-flat" ui-sref = "company({cid:'{{company._id}}'})" href="#">Show Projects</a><a class="waves-effect waves-green btn-flat" ng-click="expand(company)" style="margin-left:5px;">Company Details</a></p>
+ 								<p ><a class="waves-effect waves-green btn-flat" ui-sref = "company({cid:'{{company._id}}'})" href="#">Show Projects</a><a class="waves-effect waves-green btn-flat" ng-click="expand(company)" style="margin-left:5px;">Company Details</a>
+                  <a class="waves-effect waves-green btn-flat" ui-sref = "companyExperience({coid:'{{company._id}}'})" href="#">Experience</a></p>
  							</div>
  						</div>
  						<!-- Modal Structure -->
@@ -25,7 +26,12 @@
     <div class="modal-content">
       <h4>{{modalHeader}}</h4>
       <p style="font-size:medium;" >Stipend: Rs. {{ stipend }}</p>
-      <p>{{editable}}</p>
+      <h5>Core Business</h5>
+      <p>{{editable_1}}</p>
+      <h5>Nature of Projects Offered</h5>
+      <p>{{editable_2}}</p>
+      <h5>Company Address</h5>
+      <p>{{editable_3}}</p>
       <a ui-sref = "companyEdit({ceid:companyId})">Edit</a>
     </div>
   </div>

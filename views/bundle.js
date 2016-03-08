@@ -6052,6 +6052,12 @@ psd.config(function($stateProvider, $urlRouterProvider) {
             url: '/companyedit/:ceid',
             templateUrl: 'companyEdit.html',
             controller: 'companyEditCtr'     
+        })
+
+        .state('companyExperience', {
+            url: '/experience/:coid',
+            templateUrl: 'experience.html',
+            controller: 'companyExpCtr'     
         });
         
 });
@@ -6101,15 +6107,28 @@ $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
 psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
   var data = {};
   data.cid = $stateParams.ceid;
-  $scope.editable = "";
+  $scope.editable_1 = "";
   $http({method: 'GET', url: '/company/get/'+data.cid}).then(function successCallback(response) {
-    $scope.editable = response.data[0].editable;
+    var editable = JSON.parse(response.data[0].editable);
+    if(editable.coreBusiness) {
+      $scope.editable_1 = editable.coreBusiness;
+    }
+    if(editable.projectNature) {
+      $scope.editable_2 = editable.projectNature;
+    }
+    if(editable.companyAddress) {
+      $scope.editable_3 = editable.companyAddress;
+    }
     $scope.name = response.data[0].name;
   }, function errorCallback(response) {
     console.log(response);
   });
   $scope.updateCompany = function() {
-    data.content = $scope.editable;
+    var jsonData = {};
+    jsonData.coreBusiness = $scope.editable_1;
+    jsonData.projectNature = $scope.editable_2;
+    jsonData.companyAddress = $scope.editable_3;
+    data.content = JSON.stringify(jsonData);
     $http.post('/company/edit/'+data.cid, data).then(function successCallback(response) {
     alert("Succesfully updated");
     console.log(response);
@@ -6130,9 +6149,20 @@ $scope.expand = function(company) {
   $scope.stipend = company.stipend;
   $scope.companyId = company._id;
   if(!(company.editable === "")) {
-    $scope.editable = company.editable;
+    var editable = JSON.parse(company.editable);
+    if(editable.coreBusiness) {
+      $scope.editable_1 = editable.coreBusiness;
+    }
+    if(editable.projectNature) {
+      $scope.editable_2 = editable.projectNature;
+    }
+    if(editable.companyAddress) {
+      $scope.editable_3 = editable.companyAddress;
+    }
   } else {
-    $scope.editable = "More details about the company coming soon!";
+    $scope.editable_1 = "More details about the company coming soon!";
+    $scope.editable_2 = "More details about the company coming soon!";
+    $scope.editable_3 = "More details about the company coming soon!";
   }
   $scope.modalHeader = company.name;
 }
@@ -6179,6 +6209,25 @@ $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(
     $scope.startLoading = false;
     $scope.subAreas = _(data).chain().flatten().pluck('broadArea').unique().value();
 
+  }, function errorCallback(response) {
+    console.log(response);
+    alert('Try again later');
+  });
+}]);
+
+psd.controller('companyExpCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+var cid= $stateParams.coid;
+$scope.domain = {};
+$scope.company = {};
+$scope.projects = [];
+$scope.startLoading = true;
+$http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(response) {
+    var data = response.data;
+    console.log(data);
+    $scope.projects = _.filter(data, function(project){ return project.newsletter !== ""; }); 
+    console.log($scope.projects);
+    $scope.company.name = data[0].company;
+    $scope.startLoading = false;
   }, function errorCallback(response) {
     console.log(response);
     alert('Try again later');

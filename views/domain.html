@@ -1,7 +1,7 @@
 <br/><h5 class="header">List of Domains</h5><br/>
 				<div class="row">
 					<ul class="collection" >
-						<a ui-sref="domain({dname: '{{domain.name}}'})" ng-repeat="domain in domains | orderBy:'dname'"><li class="collection-item hoverable">{{ domain.dname }}</li></a>
+						<a ui-sref="domain({dname: '{{domain.name}}'})" ng-repeat="domain in ::domains | orderBy:'dname'"><li class="collection-item hoverable">{{ ::domain.dname }}</li></a>
 					</ul>
 					<div class="loading" ng-show="startLoading">
 					  <div class="loading-bar"></div>

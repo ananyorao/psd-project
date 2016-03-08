@@ -1,0 +1,28 @@
+
+				<h5><strong>{{company.name}}</strong></h5>
+				<p>Academic year: 2015 - 2016<br/>Semester: 1<sup>st</sup><br/></p>
+				<ul ng-repeat = "project in projects|filter:searchProject|filter:filterByArea " class="collapsible" data-collapsible="expandable">
+					<li>
+						<div style="font-size:medium; font-weight: bold">{{ project.projectTitle }}</div>
+						<div>
+							<div class="row">
+								<div class="col s5">Name</div>
+								<div class="col s7">{{ project.name }}</div>
+							</div>
+							<div class="row">
+								<div class="col s5">ID Number</div>
+								<div class="col s7">{{ project.idno }}</div>
+							</div>
+							<div class="row">
+								<div class="col s12">{{ project.newsletter }}</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+
+				<div class="loading" ng-show="startLoading">
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					  <div class="loading-bar"></div>
+					</div>
