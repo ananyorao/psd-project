@@ -6253,13 +6253,15 @@ $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(
   });
 }]);
 
-psd.controller('loginCtr', ['$scope', '$http', function($scope, $http) {
+psd.controller('loginCtr', ['$scope', '$http', '$state', function($scope, $http, $state) {
   $scope.login = function() {
     var data = {};
     data.email = $scope.email;
     data.password = $scope.password;
     $http.post('/faculty/login', data).then(function successCallback(response) {
     var token = response.data;
+    alert("Succesfully LoggedIn!!");
+    $state.go("home");
     $scope.startLoading = false;
   }, function errorCallback(response) {
     console.log(response);
