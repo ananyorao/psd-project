@@ -87,6 +87,38 @@ module.exports = function (app, http, db) {
     res.sendfile(path.resolve('views/bundle.js')); 
   });
 
+  app.get('/font/roboto/Roboto-Regular.woff', function(req, res) {
+    res.sendfile(path.resolve('font/roboto/Roboto-Regular.woff')); 
+  });
+
+  app.get('/font/roboto/Roboto-Light.ttf', function(req, res) {
+    res.sendfile(path.resolve('font/roboto/Roboto-Light.ttf')); 
+  });
+
+  app.get('/font/roboto/Roboto-Regular.ttf', function(req, res) {
+    res.sendfile(path.resolve('font/roboto/Roboto-Regular.ttf')); 
+  });
+
+  app.get('/font/roboto/Roboto-Light.woff', function(req, res) {
+    res.sendfile(path.resolve('font/roboto/Roboto-Light.woff')); 
+  });
+
+  app.get('/font/roboto/Roboto-Light.woff2', function(req, res) {
+    res.sendfile(path.resolve('font/roboto/Roboto-Light.woff2')); 
+  });
+
+  app.get('/font/roboto/Roboto-Regular.woff2', function(req, res) {
+    res.sendfile(path.resolve('font/roboto/Roboto-Regular.woff2')); 
+  });
+
+  app.get('/font/material-design-icons/Material-Design-Icons.woff2', function(req, res) {
+    res.sendfile(path.resolve('font/material-design-icons/Material-Design-Icons.woff2')); 
+  });
+
+  app.get('/font/material-design-icons/Material-Design-Icons.woff', function(req, res) {
+    res.sendfile(path.resolve('font/material-design-icons/Material-Design-Icons.woff')); 
+  });
+  
   // catch-all
   app.get('*', function (req, res) { res.status(404).json({ error:'Invalid GET request' }) })
   app.post('*', function (req, res) { res.status(404).json({ error:'Invalid POST request' }) })

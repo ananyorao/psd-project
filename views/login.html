@@ -1,20 +1,28 @@
-<div class="row">
+<div class="section" id="index-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m9">
+        <h1 class="header center-on-small-only">Practice School Division</h1>
+        <h4 class="light red-text text-lighten-4 center-on-small-only">Please Login to Continue</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
     <form class="col s12">
       <div class="row">
-        <div class="input-field">
-          <i class="material-icons prefix">mode_edit</i>
-          <textarea ng-model="editable_1" id="icon_prefix1" class="materialize-textarea"></textarea>
-          <label for="icon_prefix1">Core Business</label>
+        <div class="input-field col s6">
+          <input ng-model="email" id="last_name" type="text" class="validate">
+          <label for="last_name">BITS Email</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field">
-          <i class="material-icons prefix">mode_edit</i>
-          <textarea ng-model="editable_2" id="icon_prefix2" class="materialize-textarea"></textarea>
-          <label for="icon_prefix2">Nature of Projects</label>
+        <div class="input-field col s6">
+          <input ng-model="password" id="last_name" type="password" class="validate">
+          <label for="last_name">Password</label>
         </div>
       </div>
-       <button ng-click = "updateCompany()" class="btn waves-effect waves-light" type="submit" name="action">Login
+       <button ng-click = "login()" class="btn waves-effect waves-light" type="submit" name="action">Login
   </button>
     </form>
 </div>

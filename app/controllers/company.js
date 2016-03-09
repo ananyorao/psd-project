@@ -104,31 +104,45 @@ module.exports = function (db, utils) {
     },
 
     edit: function(req,res) {
+      var jwt = require('jsonwebtoken');
       var sanitizer = require('sanitizer');
-      if(typeof req.headers.api_token === "undefined") {
+      if(typeof req.cookies.api_token === "undefined") {
         utils.error(res, 401, 'Invalid api_token, please login!');
         return;
       }
-      var token = req.headers.api_token;
+      var token = req.cookies.api_token;
       var decoded = jwt.verify(token, 'ajsfasknfka');
-      var cid = req.body.cid;
-      var content = {};
-      console.log(req.body.content.coreBusiness);
-      content.coreBusiness = sanitizer.sanitize(sanitizer.escape(req.body.content.coreBusiness));
-      content.projectNature = sanitizer.sanitize(sanitizer.escape(req.body.content.projectNature));
-      content.companyAddress = sanitizer.sanitize(sanitizer.escape(req.body.content.companyAddress));
-      db.Company.update({_id: cid}, {editable:JSON.stringify(content)}, function(err,affected){
+      db.Faculty.find({ 'EmailId1' : decoded.emailId}).lean().exec(function (err, faculty) {
         if(err) {
           console.log(err);
-          return;
+          return utils.error(res, 401, 'Error');
         }
-        db.Company.find({_id: cid}, function(err,resp){
-          if(err) {
-            console.log(err);
-            return;
-          }
-          res.json(resp || []);
-        }); 
+        if(faculty.length === 0) {
+          return utils.error(res, 401, 'Unauthorised Attempt')
+        }
+        if(faculty[0].PSRNNo === decoded.pass) {
+          var cid = req.body.cid;
+          var content = {};
+          content.coreBusiness = sanitizer.sanitize(sanitizer.escape(req.body.content.coreBusiness));
+          content.projectNature = sanitizer.sanitize(sanitizer.escape(req.body.content.projectNature));
+          content.companyAddress = sanitizer.sanitize(sanitizer.escape(req.body.content.companyAddress));
+          content.who = decoded;
+          db.Company.update({_id: cid}, {editable:JSON.stringify(content)}, function(err,affected){
+            if(err) {
+              console.log(err);
+              return;
+            }
+            db.Company.find({_id: cid}, function(err,resp){
+              if(err) {
+                console.log(err);
+                return;
+              }
+              res.json(resp || []);
+            }); 
+          });  
+        } else {
+          return utils.error(res, 401, 'Unauthorised Attempt')
+        }
       });
     },
 

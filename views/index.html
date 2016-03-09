@@ -5,30 +5,29 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta charset="UTF-8"/>
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 
 		<script type="text/javascript" src="/js/bundle.js"></script>
 		
 	</head>
 	<body ng-app="psd">
-		<nav class="blue darken-3">
-			<div class="nav-wrapper container">
-				<a href="#!" class="left brand-logo">PS Division</a>
-				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-				<ul class="right hide-on-med-and-down">
-					<li><a href="http://psd.bits-pilani.ac.in/">PSD Website</a></li>
-					<!--<li><a href="#">Faculty Details</a></li>-->
-					<li><a href="#">Logout</a></li>
-				</ul>
-				<ul class="side-nav" id="mobile-demo">
-					<li><a href="#">Link if necessary</a></li>
-					<li><a href="#">Another link</a></li>
-					<li><a href="#">Logout</a></li>
-				</ul>
-			</div>
-		</nav>
-		<div class="row">
+
+		<header ng-controller="sideBar" >
+      <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="mdi-navigation-menu"></i></a></div>
+      <ul id="nav-mobile" class="side-nav fixed" style="width: 240px;">
+        <li class="logo" style="height:170px"><a style="height:170px"id="logo-container" href="#" class="brand-logo">
+            <img src="https://lh5.googleusercontent.com/-E7KSRj3bf7A/AAAAAAAAAAI/AAAAAAAAA4E/KxtLp3TC8jA/s0-c-k-no-ns/photo.jpg" style="width:100%" /></a></li>
+        <li class="search" style="margin-top:100px">
+          <div class="search-wrapper card">
+            <input type="search" placeholder="Search Comany Name..." ng-model="search" id="search"><i class="material-icons">search</i>
+            <div class="search-results"></div>
+          </div>
+        </li>
+        <li class="companyListItem" ng-repeat = "company in companies|filter:search | orderBy:'name' "><a ui-sref="company({cid: '{{company._id}}'})">{{company.name}}</a></li>
+      </ul>
+    </header>
+    <main>
+		<div ui-view>
 			<!--
 			<div class="col s12 m5 offset-m2 l5 offset-l2">
 				<div class="row">
@@ -44,37 +43,19 @@
 				</div>
 			</div>
 		-->
-		<div class="col s12 m5 offset-m2 l5 offset-l2">
-			<div class="row" ui-view>
-			</div>
 		</div>
-			<div ng-controller="sideBar" class="col m3 offset-l1 hide-on-small-and-down">
-				<div class="row">
-					<form>
-						<div class="input-field">
-							<input id="search" type="search" placeholder="Search Comany Name..." required ng-model="search">
-						</div>
-					</form>
-				</div>
-				<div class="row">
-					<ul class="collapsible" data-collapsible="expandable">
-						
-												<li class="companyListItem" ng-repeat = "company in companies|filter:search | orderBy:'name' "><a ui-sref="company({cid: '{{company._id}}'})">{{company.name}}</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<footer ng-controller="sideBar" class="page-footer blue darken-3">
+	</main>
+		<footer ng-controller="sideBar" class="page-footer">
 			<div class="container">
 				<div class="row">
 					<div class="col l6 s12">
-						<h5 class="white-text">Footer Content</h5>
-						<p class="grey-text text-lighten-4">Content that can be added to the footer</p>
+						<h5 class="white-text">PSD Information Website</h5>
+						<p class="grey-text text-lighten-4">Made with ♥ in BITS Pilani, Goa Campus</p>
 					</div>
 					<div class="col l4 offset-l2 s12">
 						<h5 class="white-text">Most Viewed Companies</h5>
 						<ul>
-							<li class="companyListItem" ng-repeat = "company in mostViewed|limitTo:5"><a class="grey-text text-lighten-3" ui-sref="company({cid: '{{company._id}}'})"href="#!">{{company.name}}</a></li>
+							<li class="btn waves-effect waves-light red lighten-3" style="margin-bottom:5px" ng-repeat = "company in mostViewed|limitTo:5"><a class="grey-text text-lighten-3" ui-sref="company({cid: '{{company._id}}'})"href="#!">{{company.name}}</a></li>
 						</ul>
 					</div>
 				</div>

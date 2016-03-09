@@ -1,12 +1,24 @@
-<br/><h5 class="header">List of Domains</h5><br/>
-				<div class="row">
-					<ul class="collection" >
-						<a ui-sref="domain({dname: '{{domain.name}}'})" ng-repeat="domain in ::domains | orderBy:'dname'"><li class="collection-item hoverable">{{ ::domain.dname }}</li></a>
-					</ul>
-					<div class="loading" ng-show="startLoading">
-					  <div class="loading-bar"></div>
-					  <div class="loading-bar"></div>
-					  <div class="loading-bar"></div>
-					  <div class="loading-bar"></div>
-					</div>
-				</div>
+<div class="section" id="index-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m9">
+        <h1 class="header center-on-small-only">Practice School Division</h1>
+        <h4 class="light red-text text-lighten-4 center-on-small-only">Domains</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+	<div class="row">
+		<p class="caption">Choose a domain</p>
+		<ul class="collection" >
+			<a ui-sref="domain({dname: '{{domain.name}}'})" ng-repeat="domain in ::domains | orderBy:'dname'"><li class="collection-item hoverable">{{ ::domain.dname }}</li></a>
+		</ul>
+		<div class="loading" ng-show="startLoading">
+		  <div class="loading-bar"></div>
+		  <div class="loading-bar"></div>
+		  <div class="loading-bar"></div>
+		  <div class="loading-bar"></div>
+		</div>
+	</div>
+</div>

@@ -1,6 +1,16 @@
-
-				<h5><strong>{{company.name}}</strong></h5>
-				<p>Academic year: 2015 - 2016<br/>Semester: 1<sup>st</sup><br/></p>
+<div class="section" id="index-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m9">
+        <h1 class="header center-on-small-only">Practice School Division</h1>
+        <h4 class="light red-text text-lighten-4 center-on-small-only">{{company.name}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+				<p ng-show="hasExp">Academic year: 2015 - 2016<br/>Semester: 1<sup>st</sup><br/></p>
+				<h5 ng-show="!hasExp">No experiences found. Please check <a ui-sref = "company({cid:'{{company.cid}}'})">projects</a></h5>
 				<ul ng-repeat = "project in projects|filter:searchProject|filter:filterByArea " class="collapsible" data-collapsible="expandable">
 					<li>
 						<div style="font-size:medium; font-weight: bold">{{ project.projectTitle }}</div>
@@ -26,3 +36,4 @@
 					  <div class="loading-bar"></div>
 					  <div class="loading-bar"></div>
 					</div>
+</div>

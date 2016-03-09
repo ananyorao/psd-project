@@ -44,6 +44,12 @@ psd.config(function($stateProvider, $urlRouterProvider) {
             url: '/experience/:coid',
             templateUrl: 'experience.html',
             controller: 'companyExpCtr'     
+        })
+
+        .state('login', {
+            url: '/login',
+            templateUrl: 'login.html',
+            controller: 'loginCtr'     
         });
         
 });
@@ -53,7 +59,6 @@ $http({method: 'GET',url: '/companies'}).then(function successCallback(response)
     $scope.companies = response.data;
     $scope.mostViewed = _.sortBy(response.data, function(o) { return o.viewCount; })
     $scope.mostViewed.reverse();
-    console.log($scope.mostViewed);
   }, function errorCallback(response) {
     console.log(response);
   });
@@ -70,7 +75,6 @@ $scope.startLoading = true;
 $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
     var resp = response.data;
     for(var i = 0; i< resp.length; i++) {
-      console.log(resp[i].name);
       switch(resp[i].name) {
       case "Eco Finance":
         resp[i].dname = "Economics, Finance & Management";
@@ -90,21 +94,30 @@ $http({method: 'GET',url: '/domains'}).then(function successCallback(response) {
   });
 }]);
 
-psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', '$state', function($scope, $http, $stateParams, $state) {
+  var access = document.cookie;
+  if(access) {
+    var access = access.substring(access.indexOf("=") + 1);
+  } else {
+    $state.go('login')
+  }
   var data = {};
   data.cid = $stateParams.ceid;
   $scope.editable_1 = "";
   $http({method: 'GET', url: '/company/get/'+data.cid}).then(function successCallback(response) {
-    var editable = JSON.parse(response.data[0].editable);
-    if(editable.coreBusiness) {
-      $scope.editable_1 = editable.coreBusiness;
+    if(response.data[0].editable !== "") {
+      var editable = JSON.parse(response.data[0].editable);
+      if(editable.coreBusiness) {
+        $scope.editable_1 = editable.coreBusiness;
+      }
+      if(editable.projectNature) {
+        $scope.editable_2 = editable.projectNature;
+      }
+      if(editable.companyAddress) {
+        $scope.editable_3 = editable.companyAddress;
+      }
     }
-    if(editable.projectNature) {
-      $scope.editable_2 = editable.projectNature;
-    }
-    if(editable.companyAddress) {
-      $scope.editable_3 = editable.companyAddress;
-    }
+    
     $scope.name = response.data[0].name;
   }, function errorCallback(response) {
     console.log(response);
@@ -117,7 +130,6 @@ psd.controller('companyEditCtr', ['$scope', '$http', '$stateParams', function($s
     data.content = jsonData;
     $http.post('/company/edit/'+data.cid, data).then(function successCallback(response) {
     alert("Succesfully updated");
-    console.log(response);
     $scope.startLoading = false;
   }, function errorCallback(response) {
     console.log(response);
@@ -209,17 +221,39 @@ psd.controller('companyExpCtr', ['$scope', '$http', '$stateParams', function($sc
 var cid= $stateParams.coid;
 $scope.domain = {};
 $scope.company = {};
+$scope.company.cid= cid;
 $scope.projects = [];
 $scope.startLoading = true;
+$scope.hasExp = true;
 $http({method: 'GET', url: '/company/list/'+cid}).then(function successCallback(response) {
     var data = response.data;
-    console.log(data);
     $scope.projects = _.filter(data, function(project){ return project.newsletter !== ""; }); 
-    console.log($scope.projects);
+    if($scope.projects.length === 0) {
+      $scope.hasExp = false;
+    }
     $scope.company.name = data[0].company;
     $scope.startLoading = false;
   }, function errorCallback(response) {
     console.log(response);
     alert('Try again later');
   });
+}]);
+
+psd.controller('loginCtr', ['$scope', '$http', function($scope, $http) {
+  $scope.login = function() {
+    var data = {};
+    data.email = $scope.email;
+    data.password = $scope.password;
+    $http.post('/faculty/login', data).then(function successCallback(response) {
+    var token = response.data;
+    $scope.startLoading = false;
+  }, function errorCallback(response) {
+    console.log(response);
+    if(response.status === 401) {
+      alert("Unauthorised access, please login");
+    } else {
+      alert("Error, Please try again later");
+    }
+  });
+  }
 }]);

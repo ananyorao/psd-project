@@ -1,6 +1,18 @@
+<div class="section" id="index-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m9">
+        <h1 class="header center-on-small-only">Practice School Division</h1>
+        <h4 class="light red-text text-lighten-4 center-on-small-only">{{company.name}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
 
-				<h5><strong>{{company.name}}</strong></h5>
+<div class="container">
 				<p>Academic year: 2015 - 2016<br/>Semester: 1<sup>st</sup><br/></p>
+				<div class= "row">
+					<div class="col s12 m9 l10">
 				<div class="row">
 					<form>
 						<div class="input-field">
@@ -12,7 +24,7 @@
 					</form>
 				</div>
 				<ul ng-repeat = "project in projects|filter:searchProject|filter:filterByArea " class="collapsible" data-collapsible="expandable">
-					<li>
+					<li class="card-panel">
 						<div style="font-size:medium; font-weight: bold">{{ project.projectTitle }}</div>
 						<div>
 							<div class="row">
@@ -34,7 +46,7 @@
 							<div class="row">
 								<div class="col s5">Objective of work</div>
 								<div class="col s7">{{ project.objective | limitTo: 220 }}{{project.objective.length > 220 ? '...' : ''}}
-									<div><a href="" ng-click="expand(project)">More Information</a></div></div>
+									<div style="margin-top:15px"><a class="waves-effect waves-green btn" href="" ng-click="expand(project)">More Information</a></div></div>
 							</div>
 							
 							<div class="row">
@@ -51,7 +63,25 @@
 					  <div class="loading-bar"></div>
 					  <div class="loading-bar"></div>
 					</div>
-
+				</div>
+				<div class="col hide-on-small-only m3 l2">
+			      <div class="toc-wrapper pin-top" style="top: 0px;">
+			      	<!--
+			        <div style="height: 1px;">
+			          <ul class="section table-of-contents">
+			            <li><a href="#tables" class="active">Borderless</a></li>
+			            <li><a href="#bordered" class="">Bordered</a></li>
+			            <li><a href="#striped" class="">Striped</a></li>
+			            <li><a href="#highlight" class="">highlight</a></li>
+			            <li><a href="#centered" class="">Centered</a></li>
+			            <li><a href="#responsive" class="">Responsive</a></li>
+			          </ul>
+			        </div>
+			    -->
+			      </div>
+			    </div>
+			</div>
+</div>
 				<div ng-show="showModal" class="modal bottom-sheet" style="z-index: 1005; display: block; opacity: 1; bottom: 0px; box-shadow:0px; 0 1px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21); width:90%; margin:auto; height:550px; max-height:80%">
  		<div class="modal-footer">
       <a ng-click = "closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>

@@ -4,7 +4,7 @@ module.exports = function (mongoose, config) {
   	, ObjectId = Schema.ObjectId
     , fs = require('fs')
   
-  var facultySchema = new Schema({}, { strict: false });
+  var facultySchema = new Schema({}, { collection : 'faculty' });
 
   
   return mongoose.model('faculty', facultySchema)

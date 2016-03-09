@@ -3,6 +3,7 @@ var config   = require('./config')
   , mongoose = require('mongoose')
   , fs       = require('fs')
   , db       = {}
+var path = require('path');
 
 var filter = require('content-filter')
 var helmet = require('helmet')
